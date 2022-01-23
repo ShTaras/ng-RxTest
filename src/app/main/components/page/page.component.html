@@ -4,6 +4,6 @@
 <p class="counter">
   Counter = {{counter$|async}}
 </p>
-<p class="counter" *ngIf="updatedAt">
-  Updated at = {{updatedAt|date:'HH:mm:ss dd/MM/yyyy'}}
+<p class="counter" *ngIf="updatedAt$|async">
+  Updated at = {{updatedAt$ | async | date:'HH:mm:ss dd/MM/yyyy'}}
 </p>

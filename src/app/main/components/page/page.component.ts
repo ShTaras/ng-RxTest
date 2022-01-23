@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {countSelector, decrease, increase, reset} from "../../../reducers/counter";
+import {countSelector, decrease, increase, reset, updateAtSelector} from "../../../reducers/counter";
 import {map} from "rxjs";
 
 @Component({
@@ -9,10 +9,9 @@ import {map} from "rxjs";
   styleUrls: ['./page.component.css']
 })
 export class PageComponent implements OnInit {
-  updatedAt?: number;
   counter$ = this.store.select(countSelector);
   cannotDecrease$ = this.counter$.pipe(map(count => count <= 0))
-
+  updatedAt$ = this.store.select(updateAtSelector);
   constructor(private store: Store) {
   }
 
@@ -20,12 +19,10 @@ export class PageComponent implements OnInit {
   }
 
   increase() {
-    this.updatedAt = Date.now();
     this.store.dispatch(increase())
   }
 
   decrease() {
-    this.updatedAt = Date.now();
     this.store.dispatch(decrease())
   }
 
